@@ -140,6 +140,24 @@ export const text = function(phoneNumber = null, body = null) {
 		LaunchURL(url);
 }
 
+export const mapLatLng = function(lat, lng) {
+	let url = `geo:${lat},${lng}`;
+	if (Platform.OS === 'ios') {
+		url = `http://maps.apple.com/?ll=${lat},${lng}`;
+	}
+
+	LaunchURL(url);
+}
+
+export const mapQuery = function(q) {
+	let url = `https://maps.google.com?q=${q}`;
+	if (Platform.OS === 'ios') {
+		url = `http://maps.apple.com/?q=${q}`;
+	}
+
+	LaunchURL(url);
+}
+
 export const textWithoutEncoding = function(phoneNumber = null, body = null) {
 	if(arguments.length > 2) {
 			console.log('you supplied too many arguments. You can either supply 0 or 1 or 2');
