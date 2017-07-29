@@ -2,7 +2,7 @@
   "name": "react-native-communications",
   "version": "2.2.1",
   "description": "Open a web address or call, email, text or iMessage (iOS only) someone in React Native",
-  "main": "AKCommunications.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/anarchicknight/react-native-communications.git"
