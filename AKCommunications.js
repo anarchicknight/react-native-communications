@@ -189,7 +189,7 @@ const LaunchURL = function(url) {
 		if(!supported) {
 			console.log('Can\'t handle url: ' + url);
 		} else {
-			Linking.openURL(url)
+			return Linking.openURL(url)
 			.catch(err => {
 				if(url.includes('telprompt')) {
 					// telprompt was cancelled and Linking openURL method sees this as an error
