@@ -35,6 +35,7 @@ npm install react-native-communications@0.2.3
 ## Methods
 
 ```js
+import { phonecall } from 'react-native-communications'
 phonecall(phoneNumber, prompt)
 
 phoneNumber - String
@@ -56,6 +57,7 @@ If you face any problems having apps approved because of this raise an issue in 
 ---
 
 ```js
+import { email } from 'react-native-communications'
 email(to, cc, bcc, subject, body)
 
 to - String Array
@@ -84,6 +86,7 @@ e.g.
 ---
 
 ```js
+import { text } from 'react-native-communications'
 text(phoneNumber, body)
 
 phoneNumber - String
@@ -104,6 +107,7 @@ The method will exit if more than 2 arguments are provided and the new message v
 ---
 
 ```js
+import { textWithoutEncoding } from 'react-native-communications'
 textWithoutEncoding(phoneNumber, body)
 
 phoneNumber - String
@@ -124,6 +128,7 @@ The method will exit if more than 2 arguments are provided and the new message v
 ---
 
 ```js
+import { address } from 'react-native-communications'
 web(address)
 
 address - String
