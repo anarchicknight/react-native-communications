@@ -114,7 +114,6 @@ export const email = function(to, cc, bcc, subject, body, emailUrl) {
 
 			url += 'body=' + encodeURIComponent(arguments[4]);
 		}
-		console.log(url);
 		LaunchURL(url);
 }
 
