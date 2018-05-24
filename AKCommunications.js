@@ -35,8 +35,8 @@ export const phonecall = function(phoneNumber, prompt) {
 		LaunchURL(url);
 }
 
-export const email = function(to, cc, bcc, subject, body) {
-	let url = 'mailto:';
+export const email = function(to, cc, bcc, subject, body, emailUrl) {
+	let url = emailUrl || 'mailto:';
 		let argLength = arguments.length;
 
 		switch(argLength) {
@@ -44,6 +44,8 @@ export const email = function(to, cc, bcc, subject, body) {
 				LaunchURL(url);
 				return;
 			case 5:
+				break;
+			case 6:
 				break;
 			default:
 				console.log('you must supply either 0 or 5 arguments. You supplied ' + argLength);
@@ -58,11 +60,21 @@ export const email = function(to, cc, bcc, subject, body) {
 			let validAddresses = getValidArgumentsFromArray(arguments[0], 'String');
 
 			if(validAddresses.length > 0) {
+				if (url === 'ms-outlook://') {
+					url += 'compose?to=';
+				}
+
+				if (url === 'googlegmail://') {
+					url += 'co?to='
+				}
+
 				url += encodeURIComponent(validAddresses.join(','));
 			}
 		}
 
-		url += '?';
+		if (!url.includes('ms-outlook://') && !url.includes('googlegmail://')) {
+			url += '?';
+		}
 
 		if(isCorrectType('Array', arguments[1])) {
 			let validAddresses = getValidArgumentsFromArray(arguments[1], 'String');
@@ -102,7 +114,6 @@ export const email = function(to, cc, bcc, subject, body) {
 
 			url += 'body=' + encodeURIComponent(arguments[4]);
 		}
-
 		LaunchURL(url);
 }
 
