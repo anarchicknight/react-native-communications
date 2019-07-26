@@ -106,7 +106,7 @@ export const email = function(to, cc, bcc, subject, body) {
 		LaunchURL(url);
 }
 
-export const text = function(phoneNumber = null, body = null) {
+export const text = function(phoneNumbers = null, body = null) {
 	if(arguments.length > 2) {
 			console.log('you supplied too many arguments. You can either supply 0 or 1 or 2');
 			return;
@@ -114,15 +114,22 @@ export const text = function(phoneNumber = null, body = null) {
 
 		let url = 'sms:';
 
-		if(phoneNumber) {
-			if(isCorrectType('String', phoneNumber)) {
-				url += phoneNumber;
-			} else {
-				console.log('the phone number should be provided as a string. It was provided as '
-					+ Object.prototype.toString.call(phoneNumber).slice(8, -1)
-					+ ',ignoring the value provided');
-			}
-		}
+		if (phoneNumbers) {
+            if (isCorrectType('String', phoneNumbers)) {
+                phoneNumbers = [phoneNumbers];
+            } else if (!Array.isArray(phoneNumbers)) {
+                console.log('the phone number should be provided as a string. It was provided as '
+                    + Object.prototype.toString.call(phoneNumbers).slice(8, -1)
+                    + ',ignoring the value provided');
+                return;
+            }
+    
+            if (Platform.OS === 'ios') {
+                url += `/open?addresses=${phoneNumbers.join(',')}`;
+            } else {
+                url += phoneNumbers.join(';');
+            }
+        }
 
 		if(body) {
 			if(isCorrectType('String', body)) {
@@ -140,7 +147,7 @@ export const text = function(phoneNumber = null, body = null) {
 		LaunchURL(url);
 }
 
-export const textWithoutEncoding = function(phoneNumber = null, body = null) {
+export const textWithoutEncoding = function(phoneNumbers = null, body = null) {
 	if(arguments.length > 2) {
 			console.log('you supplied too many arguments. You can either supply 0 or 1 or 2');
 			return;
@@ -148,15 +155,22 @@ export const textWithoutEncoding = function(phoneNumber = null, body = null) {
 
 		let url = 'sms:';
 
-		if(phoneNumber) {
-			if(isCorrectType('String', phoneNumber)) {
-				url += phoneNumber;
-			} else {
-				console.log('the phone number should be provided as a string. It was provided as '
-					+ Object.prototype.toString.call(phoneNumber).slice(8, -1)
-					+ ',ignoring the value provided');
-			}
-		}
+		if (phoneNumbers) {
+            if (isCorrectType('String', phoneNumbers)) {
+                phoneNumbers = [phoneNumbers];
+            } else if (!Array.isArray(phoneNumbers)) {
+                console.log('the phone number should be provided as a string. It was provided as '
+                    + Object.prototype.toString.call(phoneNumbers).slice(8, -1)
+                    + ',ignoring the value provided');
+                return;
+            }
+    
+            if (Platform.OS === 'ios') {
+                url += `/open?addresses=${phoneNumbers.join(',')}`;
+            } else {
+                url += phoneNumbers.join(';');
+            }
+        }
 
 		if(body) {
 			if(isCorrectType('String', body)) {
